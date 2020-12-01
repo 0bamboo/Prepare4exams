@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abdait-m <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: abdait-m <abdait-m@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 20:49:33 by abdait-m          #+#    #+#             */
-/*   Updated: 2020/01/30 20:50:14 by abdait-m         ###   ########.fr       */
+/*   Updated: 2020/12/01 16:31:24 by abdait-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ typedef struct s_fs
 	char *s;
 	char *out;
 	int ret;
-}				t_fs;
+}				t_flg;
 
 
-void	ft_putchar(char c, int n, t_fs *fs)
+void	ft_putchar(char c, int n, t_flg *fs)
 {
 	fs->ret += n;
 	while (n--)
@@ -39,7 +39,7 @@ void	ft_putchar(char c, int n, t_fs *fs)
 }
 
 
-void	ft_putstr(char *s, t_fs *fs)
+void	ft_putstr(char *s, t_flg *fs)
 {
 	if (fs->spec == 's' && s)
 		while (fs->len--)
@@ -75,7 +75,7 @@ int		len(char *s)
 }
 
 
-void	init_flag(t_fs *fs)
+void	init_flag(t_flg *fs)
 {
 	fs->spec = 0;
 	fs->len = 0;
@@ -83,11 +83,11 @@ void	init_flag(t_fs *fs)
 	fs->point = 0;
 	fs->precision = 0;
 	fs->width = 0;
-	fs->out = "OMB";
+	fs->out = "HAH";
 }
 
 
-void	gather_flag(t_fs *fs, char *s, va_list *ap)
+void	gather_flag(t_flg *fs, char *s, va_list *ap)
 {
 	while (*s)
 	{
@@ -135,7 +135,7 @@ int		nbrlen(int n)
 }
 
 
-void	correct_dec(t_fs *fs)
+void	correct_dec(t_flg *fs)
 {
 	fs->len = nbrlen(fs->d);
 	if (fs->d < 0)
@@ -148,7 +148,7 @@ void	correct_dec(t_fs *fs)
 }
 
 
-void	ft_putnbr(long l, t_fs *fs)
+void	ft_putnbr(long l, t_flg *fs)
 {
 	if (l > 9)
 		ft_putnbr(l / 10, fs);
@@ -156,7 +156,7 @@ void	ft_putnbr(long l, t_fs *fs)
 }
 
 
-void	print_dec(t_fs *fs)
+void	print_dec(t_flg *fs)
 {
 	fs->width ? ft_putchar(' ', fs->width, fs) : 0;
 	fs->sign ? ft_putchar('-', 1, fs) : 0;
@@ -194,7 +194,7 @@ char * hex_conv(unsigned int u, int step)
 	return (hex);
 }
 
-void	correct_hex(t_fs *fs)
+void	correct_hex(t_flg *fs)
 {
 	fs->s = hex_conv(fs->u, 0);
 	fs->len = len(fs->s);
@@ -205,7 +205,7 @@ void	correct_hex(t_fs *fs)
 }
 
 
-void	print_hex(t_fs *fs)
+void	print_hex(t_flg *fs)
 {
 	fs->width ? ft_putchar(' ', fs->width, fs) : 0;
 	fs->precision ? ft_putchar('0', fs->precision, fs) : 0;
@@ -215,7 +215,7 @@ void	print_hex(t_fs *fs)
 }
 
 
-void	correct_str(t_fs *fs)
+void	correct_str(t_flg *fs)
 {
 	fs->len = fs->s != NULL ? len(fs->s) : 6;
 	fs->len = (fs->point && fs->len > fs->precision) ? fs->precision : fs->len;
@@ -223,7 +223,7 @@ void	correct_str(t_fs *fs)
 }
 
 
-void	print_str(t_fs *fs)
+void	print_str(t_flg *fs)
 {
 	fs->width ? ft_putchar(' ', fs->width, fs) : 0;
 	if (fs->s != NULL)
@@ -233,7 +233,7 @@ void	print_str(t_fs *fs)
 }
 
 
-void 	global_print(t_fs *fs)
+void 	global_print(t_flg *fs)
 {
 	if (fs->spec == 'd')
 	{
@@ -256,7 +256,7 @@ void 	global_print(t_fs *fs)
 int		ft_printf(const char *s, ...)
 {
 	va_list ap;
-	t_fs fs;
+	t_flg fs;
 
 	fs.ret = 0;
 	va_start(ap, s);
