@@ -6,7 +6,7 @@
 /*   By: abdait-m <abdait-m@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 20:49:33 by abdait-m          #+#    #+#             */
-/*   Updated: 2020/12/01 16:31:24 by abdait-m         ###   ########.fr       */
+/*   Updated: 2020/12/17 18:49:57 by abdait-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 typedef struct s_fs
 {
-	char spec;
+	char sp_c;
 	int width;
 	int sign;
 	int precision;
@@ -41,7 +41,7 @@ void	ft_putchar(char c, int n, t_flg *fs)
 
 void	ft_putstr(char *s, t_flg *fs)
 {
-	if (fs->spec == 's' && s)
+	if (fs->sp_c == 's' && s)
 		while (fs->len--)
 			ft_putchar(*s++, 1, fs);
 	else if (s)
@@ -77,7 +77,7 @@ int		len(char *s)
 
 void	init_flag(t_flg *fs)
 {
-	fs->spec = 0;
+	fs->sp_c = 0;
 	fs->len = 0;
 	fs->sign = 0;
 	fs->point = 0;
@@ -93,7 +93,7 @@ void	gather_flag(t_flg *fs, char *s, va_list *ap)
 	{
 		if (*s == 'd' || *s == 's' || *s == 'x')
 		{
-			fs->spec = *s;
+			fs->sp_c = *s;
 			if (*s == 'd')
 				fs->d = va_arg(*ap, int);
 			else if (*s == 's')
@@ -135,7 +135,7 @@ int		nbrlen(int n)
 }
 
 
-void	correct_dec(t_flg *fs)
+void	parse_dec(t_flg *fs)
 {
 	fs->len = nbrlen(fs->d);
 	if (fs->d < 0)
@@ -194,7 +194,7 @@ char * hex_conv(unsigned int u, int step)
 	return (hex);
 }
 
-void	correct_hex(t_flg *fs)
+void	parse_hex(t_flg *fs)
 {
 	fs->s = hex_conv(fs->u, 0);
 	fs->len = len(fs->s);
@@ -215,7 +215,7 @@ void	print_hex(t_flg *fs)
 }
 
 
-void	correct_str(t_flg *fs)
+void	parse_str(t_flg *fs)
 {
 	fs->len = fs->s != NULL ? len(fs->s) : 6;
 	fs->len = (fs->point && fs->len > fs->precision) ? fs->precision : fs->len;
@@ -235,19 +235,19 @@ void	print_str(t_flg *fs)
 
 void 	global_print(t_flg *fs)
 {
-	if (fs->spec == 'd')
+	if (fs->sp_c == 'd')
 	{
-		correct_dec(fs);
+		parse_dec(fs);
 		print_dec(fs);
 	}
-	else if (fs->spec == 'x')
+	else if (fs->sp_c == 'x')
 	{
-		correct_hex(fs);
+		parse_hex(fs);
 		print_hex(fs);
 	}
-	else if (fs->spec == 's')
+	else if (fs->sp_c == 's')
 	{
-		correct_str(fs);
+		parse_str(fs);
 		print_str(fs);
 	}
 }
