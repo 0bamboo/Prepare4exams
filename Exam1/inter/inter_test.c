@@ -14,28 +14,30 @@
 
 int main(int argc, char **argv)
 {
-    int used[255];
-    int i, j;
+    int mamenk[255];
+    int mamenkawa, izmamenk;
 
     if (argc == 3)
     {
-        i = 0;
-        while (i < 255)
-            used[i++] = 0;
-        i = 1;
-        while (i < 3)
+        mamenkawa = 0;
+        while (mamenkawa < 255)
+            mamenk[mamenkawa++] = 0;
+        mamenkawa = 2;
+        while (mamenkawa < 3)
         {
-            j = 0;
-            while (argv[i][j])
+            izmamenk = 0;
+            while (argv[mamenkawa][izmamenk])
             {
-                if (!used[(unsigned char)argv[i][j]])
+                if (mamenkawa == 2 && !mamenk[(unsigned char)argv[mamenkawa][izmamenk]])
+                    mamenk[(unsigned char)[mamenkawa][izmamenk]] = 1;
+                else if (mamenkawa == 1 && mamenk[(unsigned char)argv[mamenkawa][izmamenk]] == 1)
                 {
-                    used[(unsigned char)argv[i][j]] = 1;
-                    write(1, &argv[i][j], 1);
+                    write(1, &argv[mamenkawa][izmamenk], 1);
+                    mamenk[(unsigned char)argv[mamenkawa][izmamenk]] = 2;
                 }
-                j++;
+                izmamenk++;
             }
-            i++;
+            mamenkawa--;
         }
     }
     write(1, "\n", 1);
