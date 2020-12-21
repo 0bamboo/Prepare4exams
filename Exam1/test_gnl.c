@@ -12,42 +12,42 @@
 
 #include "get_next_line.h"
 
-int is_n(char *s)
+int is_n(char *w)
 {
-    while (*s)
+    while (*w)
     {
-        if (*s == '\n')
+        if (*w == '\n')
             return (1);
-        s++;
+        w++;
     }
     return (0);
 }
 
-int ft_strlen(char *s)
+int ft_strlen(char *z)
 {
-    int i;
+    int zz;
 
-    i = 0;
-    while (s[i++])
-    return (i);
+    zz = 0;
+    while (z[zz++]);
+    return(--zz);
 }
 
 char *ft_strdup(char *s)
 {
     int i;
     int len;
-    char *tmp;
+    char *ret;
 
     len = ft_strlen(s) + 1;
-    tmp = malloc(sizeof(char) * len);
+    ret = malloc(sizeof(char) * len);
     i = 0;
     while (s[i])
     {
-        tmp[i] = s[i];
+        ret[i] = s[i];
         i++;
     }
-    tmp[i] = '\0';
-    return (tmp);
+    ret[i] = '\0';
+    return (ret);
 }
 
 char *ft_strjoin(char *s1, char *s2)
@@ -69,21 +69,21 @@ char *ft_strjoin(char *s1, char *s2)
     return (fill);
 }
 
-char *my_strcut(char *content, int end)
+char *my_strcut(char *str, int end)
 {
     int len;
     int i;
-    char *tmp;
+    char *bf;
 
-    len = ft_strlen(content);
+    len = ft_strlen(str);
     if (len > end)
         len = end;
-    tmp = malloc(sizeof(char) * (len + 1));
+    bf = malloc(sizeof(char) * (len + 1));
     i = 0;
-    while (*content && len--)
-        tmp[i++] = *content++;
-    tmp[i] = '\0';
-    return (tmp);
+    while (*str && len--)
+        bf[i++] = *str++;
+    bf[i] = '\0';
+    return (bf);
 }
 
 int fill_line(char **content, char **line)
@@ -131,5 +131,5 @@ int get_next_line(char **line)
                 break;
         }
     free(buff);
-    return (fill_line(&content, buff));
+    return (fill_line(&content, line));
 }

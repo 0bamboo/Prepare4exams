@@ -6,38 +6,39 @@
 /*   By: abdait-m <abdait-m@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/20 05:53:07 by abdait-m          #+#    #+#             */
-/*   Updated: 2020/12/20 06:31:21 by abdait-m         ###   ########.fr       */
+/*   Updated: 2020/12/21 21:01:00 by abdait-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include<unistd.h>
 
 int main(int argc, char **argv)
 {
-    int mamenk[255];
-    int mamenkawa, izmamenk;
+    int used[255];
+    int i, j;
 
+    // this inter program
     if (argc == 3)
     {
-        mamenkawa = 0;
-        while (mamenkawa < 255)
-            mamenk[mamenkawa++] = 0;
-        mamenkawa = 2;
-        while (mamenkawa < 3)
+        i = 0;
+        while (i < 255)
+            used[i++] = 0;
+        i = 2;
+        while (i > 0)
         {
-            izmamenk = 0;
-            while (argv[mamenkawa][izmamenk])
+            j = 0;
+            while (argv[i][j])
             {
-                if (mamenkawa == 2 && !mamenk[(unsigned char)argv[mamenkawa][izmamenk]])
-                    mamenk[(unsigned char)[mamenkawa][izmamenk]] = 1;
-                else if (mamenkawa == 1 && mamenk[(unsigned char)argv[mamenkawa][izmamenk]] == 1)
+                if (i == 2 && !used[(unsigned char)argv[i][j]])
+                    used[(unsigned char)argv[i][j]] = 1;
+                else if (i ==1 && used[(unsigned char)argv[i][j]] == 1)
                 {
-                    write(1, &argv[mamenkawa][izmamenk], 1);
-                    mamenk[(unsigned char)argv[mamenkawa][izmamenk]] = 2;
+                    write(1, &argv[i][j], 1);
+                    used[(unsigned char)argv[i][j]] = 2;
                 }
-                izmamenk++;
+                j++;
             }
-            mamenkawa--;
+            i--;
         }
     }
     write(1, "\n", 1);
