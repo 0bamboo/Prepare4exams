@@ -12,78 +12,79 @@
 
 #include "get_next_line.h"
 
-int is_n(char *w)
+int is_n(char *s)
 {
-    while (*w)
+    while (*s)
     {
-        if (*w == '\n')
+        if (*s == '\n')
             return (1);
-        w++;
+        s++;
     }
     return (0);
 }
 
-int ft_strlen(char *z)
-{
-    int zz;
 
-    zz = 0;
-    while (z[zz++]);
-    return(--zz);
+int ft_strlen(char *s)
+{
+    int i;
+    
+    i = 0;
+    while (s[i++]);
+    return (--i);
 }
 
-char *ft_strdup(char *s)
+char *ft_strdup(char *str)
 {
     int i;
     int len;
-    char *ret;
+    char *tmp;
 
-    len = ft_strlen(s) + 1;
-    ret = malloc(sizeof(char) * len);
+    len = ft_strlen(str) + 1;
+    tmp = malloc(sizeof(char) * len);
     i = 0;
-    while (s[i])
+    while (str[i])
     {
-        ret[i] = s[i];
+        tmp[i] = str[i];
         i++;
     }
-    ret[i] = '\0';
-    return (ret);
+    tmp[i] = '\0';
+    return (tmp);
 }
 
-char *ft_strjoin(char *s1, char *s2)
+char *ft_strjion(char *st1, char *st2)
 {
     int len1;
     int len2;
     int i;
     char *fill;
 
-    len1 = ft_strlen(s1);
-    len2 = ft_strlen(s2);
-    fill = malloc(sizeof(char) * (len1 + len2 + 1));
+    len1 = ft_strlen(st1);
+    len2 = ft_strlen(st2);
     i = 0;
-    while (*s1)
-        fill[i++] = *s1++;
-    while (*s2)
-        fill[i++] = *s2++;
+    fill = malloc(sizeof(char) * (len1 + len2 + 1));
+    while (*st1)
+        fill[i++] = *st1++;
+    while (*st2)
+        fill[i++] = *st2++;
     fill[i] = '\0';
     return (fill);
 }
 
 char *my_strcut(char *str, int end)
 {
-    int len;
     int i;
-    char *bf;
+    int len;
+    char *tmp;
 
     len = ft_strlen(str);
     if (len > end)
         len = end;
-    bf = malloc(sizeof(char) * (len + 1));
+    tmp = malloc(sizeof(char) * (len + 1));
     i = 0;
     while (*str && len--)
-        bf[i++] = *str++;
-    bf[i] = '\0';
-    return (bf);
+        tmp[i++] = *str++;
+    tmp[i] = '\0';
+    return (tmp);
 }
 
 int fill_line(char **content, char **line)
@@ -102,7 +103,7 @@ int fill_line(char **content, char **line)
         *content = tmp;
         return (1);
     }
-    else if ((*content)[end] == '\0')
+    else if ((*content)[end]  == '\0')
     {
         *line = ft_strdup(*content);
         free(*content);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   inter_test.c                                       :+:      :+:    :+:   */
+/*   union_test.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abdait-m <abdait-m@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/20 05:53:07 by abdait-m          #+#    #+#             */
-/*   Updated: 2020/12/23 17:45:56 by abdait-m         ###   ########.fr       */
+/*   Created: 2020/12/23 17:47:25 by abdait-m          #+#    #+#             */
+/*   Updated: 2020/12/23 17:50:57 by abdait-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,22 @@ int main(int argc, char **argv)
         i = 0;
         while (i < 255)
             used[i++] = 0;
-        i = 2;
-        while (i > 0)
+        i = 1;
+        while (i < 3)
         {
             j = 0;
             while (argv[i][j])
             {
-                if (i == 2 && !used[(unsigned char)argv[i][j]])
-                    used[(unsigned char)argv[i][j]] = 1;
-                else if (i == 1 && used[(unsigned char)argv[i][j]] == 1)
+                if (!used[(unsigned char)argv[i][j]])
                 {
                     write(1, &argv[i][j], 1);
-                    used[(unsigned char)argv[i][j]] = 2;
+                    used[(unsigned char)argv[i][j]] = 1;
                 }
                 j++;
             }
-            i--;
+            i++;
         }
     }
     write(1, "\n", 1);
-    return (0);
+    return(0);
 }
