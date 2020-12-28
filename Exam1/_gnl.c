@@ -39,7 +39,7 @@ char *ft_strdup(char *s)
     char *ret;
 
     len = ft_strlen(s) + 1;
-    ret = malloc(sizeof(char) * len);
+    ret = (char *)malloc(len);
     i = 0;
     while (s[i])
     {
@@ -119,8 +119,8 @@ int get_next_line(char **line)
 
     if (content == NULL)
         content = ft_strdup("");
-    buff = malloc(sizeof(char) * 101);
-    if (!(is_n(content)))
+    buff = (char *)malloc(101);
+    if (!is_n(content))
         while ((r = read(0, buff, 100)) > 0)
         {
             buff[r] = '\0';
@@ -132,4 +132,19 @@ int get_next_line(char **line)
         }
     free(buff);
     return (fill_line(&content, line));
+}
+
+int main(void) {
+  int r;
+  char *line;
+
+  line = NULL;
+  while ((r = get_next_line(&line)) > 0) {
+    printf("%s\n", line);
+    free(line);
+    line = NULL;
+  }
+  printf("%s", line);
+  free(line);
+  line = NULL;
 }

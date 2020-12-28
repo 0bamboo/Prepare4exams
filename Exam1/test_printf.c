@@ -51,17 +51,88 @@ void print_hex(t_flg *fs);
 void print_str(t_flg *fs);
 void global_print(t_flg *fs);
 
-int ft_printf(char *s, ...) 
+void ft_putchar(char c, int n, t_flg *fs)
+{
+    fs->ret += n;
+    while (n--)
+        write(1, &c, 1);
+}
+
+void init_flag(t_flg *fs)
+{
+    fs->sp_c = 0;
+    fs->width = 0;
+    fs->precision = 0;
+    fs->sign = 0;
+    fs->point = 0;
+    fs->len =0;
+    fs->out = "hel";
+}
+
+void gather_flag(t_flg *fs, char *s, va_list *ap)
+{
+    while (*s)
+    {
+        if (*s == 'd' || *s == 'x' || *s == 's')
+        {
+            fs->sp_c = *s;
+            if (*s == 'd')
+                fs->d = va_arg(*ap, int);
+            else if (*s == 's')
+                fs->s = va_arg(*ap, char *);
+            else if (*s == 'x')
+                fs->u = va_arg(*ap, unsigned int);
+            ++s;
+            break;
+        }
+        if (*s == '.')
+        {
+            fs->point = 1;
+            fs->precision =ft_atoi(++s);
+            while (is_dig(*s))
+                s++;
+        }
+        if (is_dig(*s))
+        {
+            fs->width = ft_atoi(s);
+            while (is_dig(*s))
+                s++;
+        }
+    }
+    fs->out = s;
+}
+
+void global_print(t_flg *fs)
+{
+    if (fs->sp_c == 'd')
+    {
+        parse_dec(fs);
+        print_dec(fs);
+    }
+    else if (fs->sp_c == 'x')
+    {
+        parse_hex(fs);
+        print_hex(fs);
+    }
+    else if (fs->sp_c == 's')
+    {
+        parse_str(fs);
+        print_str(fs);
+    }
+}
+
+int ft_printf(const char *s, ...)
 {
     va_list ap;
     t_flg fs;
 
     fs.ret = 0;
+    va_start(ap, s);
     while (*s)
     {
-        while (*s && *s != '&')
+        while (*s && *s != '%')
             ft_putchar(*s++, 1, &fs);
-        if (*s && *s == '&')
+        if (*s && *s == '%')
         {
             init_flag(&fs);
             gather_flag(&fs, (char *)++s, &ap);

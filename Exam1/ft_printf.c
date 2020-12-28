@@ -5,7 +5,7 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: abdait-m <abdait-m@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/30 20:49:33 by abdait-m          #+#    #+#             */
+/*   Created: 2020/01/30 20:49:33 by obouykou          #+#    #+#             */
 /*   Updated: 2020/12/17 18:49:57 by abdait-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -140,7 +140,7 @@ void	parse_dec(t_flg *fs)
 	fs->len = nbrlen(fs->d);
 	if (fs->d < 0)
 		fs->sign = 1;
-	fs->l = fs->sign ? -(long)fs->d : (long)fs->d;
+	fs->l = fs->sign ? - (long)fs->d : (long)fs->d;
 	if (!fs->l && fs->point && fs->precision == 0)
 		fs->len = 0;
 	fs->precision -= (fs->precision > fs->len) ? fs->len : fs->precision;
@@ -175,7 +175,7 @@ char	hex_dig(int	n)
 }
 
 
-char * hex_conv(unsigned int u, int step)
+char *hex_conv(unsigned int u, int step)
 {
 	static char *hex;
 	static int l;

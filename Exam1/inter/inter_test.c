@@ -6,7 +6,7 @@
 /*   By: abdait-m <abdait-m@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/20 05:53:07 by abdait-m          #+#    #+#             */
-/*   Updated: 2020/12/23 17:45:56 by abdait-m         ###   ########.fr       */
+/*   Updated: 2020/12/28 15:12:00 by abdait-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int main(int argc, char **argv)
 {
     int used[255];
-    int i, j;
+    int i,j;
 
     if (argc == 3)
     {
