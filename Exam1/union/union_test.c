@@ -6,16 +6,16 @@
 /*   By: abdait-m <abdait-m@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 17:47:25 by abdait-m          #+#    #+#             */
-/*   Updated: 2020/12/28 15:15:46 by abdait-m         ###   ########.fr       */
+/*   Updated: 2020/12/29 10:30:29 by abdait-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-int main(int argc, char **argv)
+int main(int argc , char **argv)
 {
     int used[255];
-    int i, j;
+    int i,j;
 
     if (argc == 3)
     {
@@ -35,7 +35,6 @@ int main(int argc, char **argv)
                 }
                 j++;
             }
-
             i++;
         }
     }

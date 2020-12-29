@@ -277,7 +277,7 @@ int		ft_printf(const char *s, ...)
 
 #include <stdio.h>
 
-#define exp "|hello %.x %s %s|", 1551255, "hello", NULL
+#define exp "|hello %4.0d %x %s %s|", 999,1551255, "hello", NULL
 
 int main(void)
 {
