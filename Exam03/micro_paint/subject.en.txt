@@ -26,7 +26,8 @@ The lines must be read in order and therefore operations must be executed in the
 There must be one space between each variable in a line
 
 WIDTH HEIGHT BACKGROUND_CHAR
-This line is always the first line of the file and it defines the zone where to draw. Your program should not display anything outside the draw zone. It must be there only once.
+This line is always the first line of the file and it defines the zone where to draw. Your program should not display anything 
+outside the draw zone. It must be there only once.
 - WIDTH: must be a int with 0 < WIDTH <= 300, the horizontal number of characters to use for the draw zone
 - HEIGHT: must be a int with 0 < HEIGHT <= 300, the vertical number of characters to use for the draw zone 
 - BACKGROUND_CHAR: any empty space will be filled with BACKGROUND_CHAR
