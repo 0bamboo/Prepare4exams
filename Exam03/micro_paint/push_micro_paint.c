@@ -39,7 +39,8 @@ char *get_zone(FILE *file, t_zone *zone)
     char *draw;
     int i;
 
-    if ((ret = fscanf(file, " %f %f %c\n", &zone->width, &zone->height, &zone->ch)) != 3)
+    if ((ret = fscanf(file, " %f %f %c\n", &zone->width,
+    &zone->height, &zone->ch)) != 3)
         return (NULL);
     if (ret == -1)
         return (NULL);
