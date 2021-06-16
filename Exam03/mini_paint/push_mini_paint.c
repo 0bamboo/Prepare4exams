@@ -96,7 +96,7 @@ int drawing_shipe(FILE *file, t_zone *zone, char *draw)
             j++;
         }
     }
-    if (ret != -1)
+    if (ret != 5)
         return(0);
     return(1);
 }

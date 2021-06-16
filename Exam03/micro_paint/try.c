@@ -13,6 +13,16 @@ typedef struct s_rect
 {
     char type;
     float x;
+    float y;
+    float w;
+    float h;
+    char c;
+}t_rect;
+
+typedef struct s_rect
+{
+    char type;
+    float x;
     float   y;
     float w;
     float h;
@@ -45,14 +55,14 @@ int ft_free(FILE *file, char *draw, char *msg)
         ft_putstr(msg);
     return 1;
 }
+
 char *get_zone(FILE *file, t_zone *zone)
 {
     int i;
     int ret;
     char *draw;
 
-    if ((ret = fscanf(file, " %f %f %c\n", &zone->width,
-    &zone->height, &zone->ch)) != 3)
+    if ((ret = fscanf(file, " %f %f %c\n", &zone->width, &zone->height, &zone->ch)) != 3)
         return NULL;
     if (ret == -1)
         return NULL;
@@ -60,27 +70,29 @@ char *get_zone(FILE *file, t_zone *zone)
         return NULL;
     if (zone->height <= 0 || zone->height > 300)
         return NULL;
-    if (!(draw = malloc(sizeof(char) * zone->width * zone->height)))
+    if (!(draw = malloc(sizeof(char) * zone->height * zone->width)))
         return NULL;
     i = 0;
-    while (i < zone->width * zone->height)
+    while (i < zone->height * zone->width)
         draw[i++] = zone->ch;
     return draw;
 }
 
+
+
 int main(int ac, char **av)
 {
     int i;
-    t_zone zone;
     FILE *file;
+    t_zone zone;
     char *draw;
 
     if (ac != 2)
     {
-        ft_putstr("Error: argmunet\n");
+        ft_putstr("Error: argument\n");
         return 1;
     }
-    if ((file = fopen(av[1], "r")))
+    if (!(file = fopen(av[1], "r")))
     {
         ft_putstr("Error: Operation file corrupted\n");
         return 1;

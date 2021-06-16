@@ -76,7 +76,7 @@ int drawing_shipe(FILE *file, t_zone *zone, char *draw)
     ret = 0;
     while ((ret = fscanf(file, " %c %f %f %f %f %c\n", &rect.type, &rect.x, &rect.y, &rect.w, &rect.h ,&rect.c)) == 6)
     {
-        if (rect.w <= 0.00000000 || rect.h <= 0.00000000 || (rect.type != 'c' && rect.type != 'C'))
+        if (rect.w <= 0.00000000 || rect.h <= 0.00000000 || (rect.type != 'r' && rect.type != 'R'))
             return (0);
         j = 0;
         while (j < zone->height)
@@ -85,14 +85,15 @@ int drawing_shipe(FILE *file, t_zone *zone, char *draw)
             while (i < zone->width)
             {
                 ret1 = is_in_rect(i, j, &rect);
-                if ((rect.type == 'c' && ret1 == 2) || (rect.type == 'C' && ret1))
+                if ((rect.type == 'r' && ret1 == 2) || (rect.type == 'R' && ret1))
                     draw[j * (int)zone->width + i] = rect.c;
                 i++;
             }
             j++;
         }
+        return 1;
     }
-    if (ret != -1)
+    if (ret != 6)
         return(0);
     return(1);
 }
