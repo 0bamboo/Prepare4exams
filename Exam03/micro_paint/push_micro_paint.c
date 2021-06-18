@@ -58,9 +58,12 @@ char *get_zone(FILE *file, t_zone *zone)
 
 int	is_in_rect(float x, float y, t_rect *rect)
 {
-	if (((x < rect->x || (rect->x + rect->w < x)) || (y < rect->y)) || (rect->y + rect->h < y))
+	if ((x < rect->x || (rect->x + rect->w < x)) ||
+    (y < rect->y || (rect->y + rect->h < y)))
 		return (0);
-	if (((x - rect->x < 1.00000000) || ((rect->x + rect->w) - x < 1.00000000)) || ((y - rect->y < 1.00000000 || ((rect->y + rect->h) - y < 1.00000000))))
+	if (((x - rect->x < 1.00000000) ||
+    ((rect->x + rect->w) - x < 1.00000000)) ||
+    ((y - rect->y < 1.00000000 || ((rect->y + rect->h) - y < 1.00000000))))
 		return (2);
 	return (1);
 }
