@@ -68,7 +68,7 @@ int	is_in_rect(float x, float y, t_rect *rect)
 	return (1);
 }
 
-int drawing_shipe(FILE *file, t_zone *zone, char *draw)
+int drawing_shape(FILE *file, t_zone *zone, char *draw)
 {
     int ret;
     int ret1;
@@ -133,7 +133,7 @@ int main(int ac, char **av)
     }
     if (!(draw = get_zone(file, &zone)))
         return(ft_free(file, NULL, "Error: Operation file corrupted\n"));
-    if (!(drawing_shipe(file, &zone, draw)))
+    if (!(drawing_shape(file, &zone, draw)))
         return(ft_free(file, draw, "Error: Operation file corrupted\n"));
     i = 0;
     while (i < zone.height)
