@@ -1,5 +1,5 @@
-#include <stdio.h>
 #include <unistd.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 typedef struct s_rect
@@ -12,6 +12,7 @@ typedef struct s_rect
     char c;
 }t_rect;
 
+<<<<<<< HEAD
 typedef struct s_zone
 {
     float width;
@@ -20,6 +21,8 @@ typedef struct s_zone
 }t_zone;
 
 
+=======
+>>>>>>> c8270996ebdff4bd4a0eebfe4afd11afddee6aed
 void ft_putchar(char c)
 {
     write(1, &c, 1);
@@ -27,7 +30,7 @@ void ft_putchar(char c)
 
 void ft_putstr(char *str)
 {
-    while (*str)
+    while (str)
     {
         ft_putchar(*str);
         str++;
@@ -46,9 +49,13 @@ int ft_free(FILE *file, char *draw, char *msg)
 
 int is_in_rect(float x, float y, t_rect *rect)
 {
-    if (x < rect->x || y < rect->y || rect->x + rect->w < x || rect->y + rect->h < y)
+    if (x < rect->x || y < rect->y || rect->y + rect->h < y || rect->x + rect->w < x)
         return 0;
+<<<<<<< HEAD
     if ((x - rect->x < 1.00000000 || rect->x + rect->w - x < 1.00000000) || (y - rect->y < 1.00000000 || rect->y + rect->h - y < 1.00000000))
+=======
+    if ((x - rect->x < 1.00000000) || (rect->x + rect->w - x < 1.00000000) || (rect->y + rect->h - y < 1.00000000) || y - rect->y < 1.00000000)
+>>>>>>> c8270996ebdff4bd4a0eebfe4afd11afddee6aed
         return 2;
     return 1;
 }
@@ -58,7 +65,13 @@ int drawing_shape(FILE *file, t_zone *zone, char *draw)
     int i;
     int j;
     int ret;
+<<<<<<< HEAD
     int ret1;
+=======
+    int r1;
+    int i;
+    int j;
+>>>>>>> c8270996ebdff4bd4a0eebfe4afd11afddee6aed
     t_rect rect;
 
     ret = 0;
@@ -67,14 +80,20 @@ int drawing_shape(FILE *file, t_zone *zone, char *draw)
         if (rect.w <= 0.00000000 || rect.h <= 0.00000000 || (rect.type != 'r' && rect.type != 'R'))
             return 0;
         j = 0;
-        while (j < zone->height)
+        while(j < zone->height)
         {
             i = 0;
             while (i < zone->width)
             {
+<<<<<<< HEAD
                 ret1 = is_in_rect(i, j, &rect);
                 if ((rect.type == 'r' && ret1 == 2) || (rect.type == 'R' && ret1))
                     draw[j *(int)zone->width + i] = rect.c;
+=======
+                r1 = is_in_rect(i, j, &rect);
+                if ((r1 == 2 && rect.type == 'r') || (rect.type == 'R' && r1))
+                    draw[j * (int)zone->width + i] = rect.c;
+>>>>>>> c8270996ebdff4bd4a0eebfe4afd11afddee6aed
                 i++;
             }
             j++;
@@ -88,17 +107,27 @@ int drawing_shape(FILE *file, t_zone *zone, char *draw)
 
 char *get_zone(FILE *file, t_zone *zone)
 {
+<<<<<<< HEAD
     int i;
     int ret;
     char *draw;
+=======
+    char *draw;
+    int ret;
+    int i;
+>>>>>>> c8270996ebdff4bd4a0eebfe4afd11afddee6aed
 
-    if ((ret = fscanf(file, " %f %f %c\n", &zone->width, &zone->height, &zone->ch)) != 3)
+    if ((ret = fscanf(file, " %f %f %c\n", &zone->width, &zone->height, &zone->ch) != 3))
         return NULL;
     if (ret == -1)
         return NULL;
     if (zone->width <= 0 || zone->height <= 0 || zone->width > 300 || zone->height > 300)
         return NULL;
+<<<<<<< HEAD
     if (!(draw = malloc(sizeof(char) * zone->width *zone->height)))
+=======
+    if (!(draw = (char *)malloc(sizeof(char)* zone->width *zone->height)))
+>>>>>>> c8270996ebdff4bd4a0eebfe4afd11afddee6aed
         return NULL;
     i = 0;
     while (i < zone->width *zone->height)
@@ -112,7 +141,7 @@ int main(int ac, char **av)
     FILE *file;
     char *draw;
     t_zone zone;
-
+    
     if (ac != 2)
     {
         ft_putstr("Error: argument\n");
