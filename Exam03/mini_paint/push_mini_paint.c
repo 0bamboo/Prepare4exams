@@ -69,7 +69,7 @@ int is_in_circle(int x, int y, t_circle *circle)
     return(0);
 }
 
-int drawing_shipe(FILE *file, t_zone *zone, char *draw)
+int drawing_shape(FILE *file, t_zone *zone, char *draw)
 {
     int ret;
     int ret1;
@@ -96,8 +96,11 @@ int drawing_shipe(FILE *file, t_zone *zone, char *draw)
             j++;
         }
     }
-    if (ret != 5)
+    if (ret != -1)
+    {
+        printf("|%d|\n", ret);
         return(0);
+    }
     return(1);
 }
 
@@ -133,7 +136,7 @@ int main(int ac, char **av)
     }
     if (!(draw = get_zone(file, &zone)))
         return(ft_free(file, NULL, "Error: Operation file corrupted\n"));
-    if (!(drawing_shipe(file, &zone, draw)))
+    if (!(drawing_shape(file, &zone, draw)))
         return(ft_free(file, draw, "Error: Operation file corrupted\n"));
     i = 0;
     while (i < zone.height)
