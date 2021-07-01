@@ -94,9 +94,8 @@ int drawing_shape(FILE *file, t_zone *zone, char *draw)
             }
             j++;
         }
-        return 1;
     }
-    if (ret != 6)
+    if (ret != -1)
         return(0);
     return(1);
 }
