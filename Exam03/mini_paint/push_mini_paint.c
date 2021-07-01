@@ -97,10 +97,7 @@ int drawing_shape(FILE *file, t_zone *zone, char *draw)
         }
     }
     if (ret != -1)
-    {
-        printf("|%d|\n", ret);
         return(0);
-    }
     return(1);
 }
 
