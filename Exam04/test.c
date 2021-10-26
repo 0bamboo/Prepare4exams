@@ -27,6 +27,53 @@ int get_cmd(char **av);
 int exec_cmd(char **env, int fd, int pipefd[2]);
 
 
+int exec_cmd(char **env, int fd, int pipefd[2])
+{
+	pid_t pid;
+
+	if (pipe(pipefd) == -1)
+		ft_putstr("error: fatal", 2, 1);
+	if ((pid = fork()) == -1)
+		ft_putstr("error: fatal", 2, 1);
+	else if (pid == 0)
+	{
+		if (dup2(fd, 0) == -1)
+			ft_putstr("error: fatal", 2, 1);
+		if (g_type == PIPE)
+		{
+			close(pipefd[0]);
+			if (dup2(pipefd[1], 1) == -1)
+				ft_putstr("error: fatal", 2, 1);
+		}
+		if (execve(g_tab[0], g_tab, env) != 0)
+		{
+			ft_putstr("error: cannot excute ", 2, 0);
+			ft_putstr(g_tab[0], 2, 1);
+		}
+		exit(1);
+	}
+	else
+	{
+		close(pipefd[1]);
+		if (g_type == END)
+		{
+			close(pipefd[0]);
+			waitpid(pid, &g_status, 0);
+			if (WIFEXITED(g_status))
+				g_status = WEXITSTATUS(g_status);
+			if (fd != 0)
+				close(fd);
+			fd = 0;
+		}
+		if (g_type == PIPE)
+		{
+			if (fd != 0)
+				close(fd);
+			fd = pipefd[0];
+		}
+	}
+	return fd;
+}
 
 int main(int ac, char **av, char **env)
 {
@@ -43,7 +90,7 @@ int main(int ac, char **av, char **env)
 		{
 			if (g_tab[0] == NULL)
 			{
-				if (x == 2)
+				if ( x == 2)
 					break;
 			}
 			else
