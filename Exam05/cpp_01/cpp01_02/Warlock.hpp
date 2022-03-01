@@ -12,11 +12,11 @@ class Warlock
 private:
 	std::string name;
 	std::string title;
+	std::vector<ASpell*> sps;
 	Warlock(/* args */);
 	Warlock(Warlock const &); 
 	Warlock & operator=(Warlock const &);
 
-	std::vector<ASpell*> sps;
 public:
 	Warlock(std::string const &name, std::string const &title);
 	~Warlock();
